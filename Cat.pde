@@ -1,7 +1,7 @@
 void setup()
 {
   size(700,700);
-  background(255);
+  
 }
 
 float LeftEyeX = 250;
@@ -12,6 +12,8 @@ float disLeft,disRight;
 
 void draw()
 {
+  clear();
+  background(255);
   strokeWeight(5);
   fill(128,64,0);
   triangle(130,300,130,130,300,300);
@@ -58,23 +60,27 @@ void draw()
   ellipse(450,280,100,100);
   
   fill(0);
-  LeftEyeY = 280;
-  RightEyeY = 280;
-   if (LeftEyeX == 263) flag = false;
-   if (LeftEyeX == 238) flag = true;
-   if (flag) LeftEyeX++;
-     else LeftEyeX--;
-   RightEyeX = 700 - LeftEyeX;
-  
- /* disLeft = dist(mouseX,mouseY,250,280);
-  disRight = dist(mouseX,mouseY,450,280);
-  LeftEyeX = abs(abs(250-mouseX)*75/disLeft);
-  RightEyeX = abs(abs(450-mouseX)*75/disRight);
-  disLeft = dist(mouseX,mouseY,250,280);
-  disRight = dist(mouseX,mouseY,450,280);
-  LeftEyeY = abs(abs(280-mouseY)*75/disLeft);
-  RightEyeY = abs(abs(280-mouseY)*75/disRight); */
-      
+
+   float d = dist(mouseX,mouseY,250,280);
+   float Rad = 12.5;
+   if (d<Rad) {
+     LeftEyeX = mouseX;
+     LeftEyeY = mouseY;
+   }
+   else{
+     LeftEyeX = Rad/d*mouseX+(1-Rad/d)*250;
+     LeftEyeY = Rad/d*mouseY+(1-Rad/d)*280;
+   }
+   
+   d = dist(mouseX,mouseY,450,280);
+   if (d<Rad) {
+     RightEyeX = mouseX;
+     RightEyeY = mouseY;
+   }
+   else{
+     RightEyeX = Rad/d*mouseX+(1-Rad/d)*450;
+     RightEyeY = Rad/d*mouseY+(1-Rad/d)*280;
+   }
   
   ellipse(LeftEyeX,LeftEyeY,75,75);
   ellipse(RightEyeX,RightEyeY,75,75);
