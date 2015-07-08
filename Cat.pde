@@ -12,7 +12,6 @@ float disLeft,disRight;
 
 void draw()
 {
-  clear();
   background(255);
   strokeWeight(5);
   fill(128,64,0);
